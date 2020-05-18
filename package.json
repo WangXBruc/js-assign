@@ -1,6 +1,6 @@
 {
   "name": "js-assign",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Safer destructuring assignment with JavaScript",
   "main": "index.js",
   "scripts": {
