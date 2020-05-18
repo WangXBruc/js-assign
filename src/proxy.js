@@ -68,7 +68,7 @@ const usingObjectPattern = (declaration) => {
  * @param {Declaration} declaration 
  */
 const checkDeclaration = (declaration) => {
-    let oldInit = declaration.init;
+    let oldInit = declaration.init || {};
     let isObjectPattern = usingObjectPattern(declaration);
     let useProxy = usingProxy(oldInit);
     return isObjectPattern && !useProxy;
