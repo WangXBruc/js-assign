@@ -1,4 +1,4 @@
-function test() {
+const test = () =>  {
     const state = {
         fruits: ['apple', 'banana'],
         price: null,

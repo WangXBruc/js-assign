@@ -87,3 +87,6 @@ const store = { name: 'apple', price: null };
 const { name = 'orange', price: 100 } = GUtils.proxy(store);
 ```
 
+### Notice
+
+This loader doesn't not support **JSX**. So, you should call it after `babel-loader` or any other loader can transform `JSX` to pure `JS`.

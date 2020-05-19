@@ -1,6 +1,6 @@
-const esprima = require('esprima');
-const estraverse = require("estraverse");
-const escodegen = require("escodegen");
+const parser = require('@babel/parser');
+const traverse = require("@babel/traverse").default;
+const generate = require("@babel/generator").default;
 const { proxyNode, proxy, checkDeclaration } = require('./proxy.js');
 
 /**
@@ -9,11 +9,15 @@ const { proxyNode, proxy, checkDeclaration } = require('./proxy.js');
  * @return {string}
  */
 function transform(source) {
-    const ast = esprima.parse(source);
-    estraverse.traverse(ast, {
-        enter(node) {
-            if (node.type === "VariableDeclaration") {
-                const declarations = node.declarations;
+    const ast = parser.parse(source, {
+        sourceType: 'module',
+        allowImportExportEverywhere: true,
+    });
+    traverse(ast, {
+        enter(path) {
+            if (path.type === "VariableDeclaration") {
+                const node = path.node || {};
+                const declarations = node.declarations || [];
                 declarations.forEach(declaration => {
                     let oldInit = declaration.init;
                     const needTransform = checkDeclaration(declaration);
@@ -28,7 +32,7 @@ function transform(source) {
             }
         }
     });
-    return escodegen.generate(ast).toString();
+    return generate(ast, {/* options */}, source).code;
 }
 
 module.exports = transform;

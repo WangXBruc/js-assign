@@ -23,19 +23,19 @@ const proxy = (obj) => {
 const proxyNode = {
     "type": "CallExpression",
     "callee": {
-        "type": "MemberExpression",
-        "computed": false,
-        "object": {
-            "type": "Identifier",
-            "name": "GUtils",
-        },
-        "property": {
-            "type": "Identifier",
-            "name": "proxy",
-        },
+      "type": "MemberExpression",
+      "object": {
+        "type": "Identifier",
+        "name": "GUtils"
+      },
+      "property": {
+        "type": "Identifier",
+        "name": "proxy"
+      },
+      "computed": false
     },
-    "arguments": [],
-}
+    "arguments": []
+  }
 /**
  * Check if the `GUtils.proxy()` is already used in the declaration 
  * @param {Declaration.init} declarationInit 
